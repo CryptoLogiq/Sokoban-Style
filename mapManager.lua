@@ -23,8 +23,12 @@ print("Nombre de niveaux : " .. tostring(mapManager.nbLevels))
 Map = {}
 
 function mapManager.levelLoad(number)
-  Game.currentLevel = number
+  Map={}
+  Crates.purge()
+  EndPoints.purge()
+  --
   Game.victory = false
+  Player.moveCount = 0
   --
   local level = require("level_"..tostring(number))
   Map = {lig=#level, col=#level[1], w=64, h=64}

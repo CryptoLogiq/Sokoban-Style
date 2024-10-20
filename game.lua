@@ -12,15 +12,20 @@ end
 
 function game.draw()
   if game.victory then
-    love.graphics.print("LEVEL SUCCES".."\n".."Move Count : "..tostring(Player.moveCount).."\n".."Press Enter to continue", 580, 40, 0, 2, 2)
+    love.graphics.print("LEVEL "..tostring(Game.currentLevel).." SUCCES".."\n".."Move Count : "..tostring(Player.moveCount).."\n".."Press Enter to continue".."\n".."or SPACE to Retry", 500, 40, 0, 2, 2)
+  else
+    -- move count and currentLevel
+    love.graphics.print("Level : "..tostring(Game.currentLevel).."\n".."Move Count : "..tostring(Player.moveCount), 580, 20, 0, 2, 2)
   end
 end
 --
 
 function game.keypressed(k, scan)
   if game.victory then
-    if k == "enter" and game.currentLevel < MapManager.nbLevels then
+    if scan == "return" and game.currentLevel < MapManager.nbLevels then
       game.currentLevel = game.currentLevel + 1
+      MapManager.levelLoad(game.currentLevel)
+    elseif scan == "space" then
       MapManager.levelLoad(game.currentLevel)
     else
       -- titre de fin, page de victoire, autres ?

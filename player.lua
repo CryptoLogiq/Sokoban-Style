@@ -23,25 +23,20 @@ function player.draw()
   -- player imgdata
   local currentAnim = player.anims[player.currentAnim]
   love.graphics.draw(currentAnim.data, player.x, player.y)
-
-  -- move count
-  if not Game.victory then
-    love.graphics.print("Move Count : "..tostring(player.moveCount), 580, 20, 0, 2, 2)
-  end
 end
 --
 
 function player.keypressed(k, scan)
   if not Game.victory then
 
+    if scan == "space" then
+      MapManager.levelLoad(Game.currentLevel)
+    end
+
     local l = player.lig
     local c = player.col
     local move = false
     local dir = nil
-    --
-    if scan == "up" or scan == "w" or scan == "down" or scan == "s" or scan == "left" or scan == "a" or scan == "right" or scan == "d" then
-      player.moveCount = player.moveCount + 1
-    end
     --
     if scan == "up" or scan == "w" then
       if player.lig - 1 >= 1 then
@@ -95,6 +90,7 @@ function player.keypressed(k, scan)
       player.lig = l
       player.col = c
       player.currentAnim = animDir[dir]
+      player.moveCount = player.moveCount + 1
     end
 
   end
