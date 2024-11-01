@@ -78,6 +78,7 @@ function mapManager.draw()
   for l=1, #Map do
     for c=1, #Map[l] do
       local cell = Map[l][c]
+      
       -- on dessine le ground quoi qu il arrive il faut un sol
       if mapManager.debug then
         love.graphics.rectangle("line", cell.x, cell.y, cell.w, cell.h)
@@ -93,6 +94,7 @@ function mapManager.draw()
           love.graphics.draw(mapManager.wall, cell.x, cell.y)
         end
       end
+      
     end
   end
 end
